@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>你的名字 — 平面設計作品集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Noto+Sans+TC:wght@400;500;900&family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ===== 顏色（取自示範影片）===== */
+  :root{
+    --bg-top:#e9d6c5;          /* 頁面底色：上 */
+    --bg-bottom:#f2dcc7;       /* 頁面底色：下 */
+    --sheet:#f4dcc5;           /* 彈窗面板底色 */
+    --dim:rgba(168,128,100,.38); /* 彈窗開啟時背後的暗化 */
+    --ink:#2c2b29;             /* 文字 */
+    --mute:#7d7468;            /* 次要文字 */
+    --ph:#3f4648;              /* 佔位圖底色 */
+    --gutter:clamp(14px,1.6vw,24px);
+    --sans:"Inter","Noto Sans TC","PingFang TC","Microsoft JhengHei",Helvetica,Arial,sans-serif;
+    --serif:"Newsreader","Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;
+    --display:"Anton","Noto Sans TC",Impact,"Arial Narrow Bold",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:linear-gradient(180deg,var(--bg-top),var(--bg-bottom)) fixed;
+    color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.38;
+    -webkit-font-smoothing:antialiased;
+  }
+  body.locked{overflow:hidden}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+  /* ===== 導覽 ===== */
+  .nav{
+    position:fixed;inset:0 0 auto 0;z-index:100;display:flex;justify-content:space-between;
+    padding:20px var(--gutter) 28px;font:400 12.5px/1 var(--sans);letter-spacing:.01em;
+    background:linear-gradient(180deg,var(--bg-top) 30%,transparent);pointer-events:none;
+  }
+  .nav a{pointer-events:auto}
+  .nav a:hover{opacity:.55}
+  .nav .sep{margin-right:.35em}
+
+  /* ===== 首頁 ===== */
+  #home{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:90px var(--gutter) 60px;gap:clamp(24px,5vh,56px)}
+  .hero-name{font:400 clamp(15px,1.5vw,19px)/1 var(--serif);letter-spacing:.02em;text-transform:uppercase}
+  .hero-title{font:400 clamp(110px,24vw,380px)/.8 var(--display);letter-spacing:-.01em;
+    text-transform:none;color:#383635}
+  .hero-caption{font:400 clamp(12px,1.1vw,14px)/1.45 var(--serif);text-transform:uppercase;letter-spacing:.02em}
+
+  /* ===== 作品格線 ===== */
+  #projects{padding:clamp(60px,12vh,140px) var(--gutter) clamp(16px,3vh,32px)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,3.4vw,52px) var(--gutter);align-items:start}
+  .item{display:block;width:100%;text-align:center;opacity:0;transform:translateY(18px);
+    transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+  .item.in{opacity:1;transform:none}
+  .thumb{display:block;position:relative;aspect-ratio:3/2;border-radius:12px;overflow:hidden;background:var(--ph);
+    transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .item:hover .thumb{transform:translateY(-4px);box-shadow:0 14px 26px -12px rgba(70,40,20,.45)}
+  .cap{display:block;margin-top:12px;font:400 13px/1.2 var(--sans);color:var(--mute);transition:color .25s}
+  .item:hover .cap{color:var(--ink)}
+
+  /* 佔位圖（有網格線的深色板） */
+  .ph{position:absolute;inset:0;background-color:var(--ph);
+    background-image:
+      linear-gradient(to right,rgba(255,255,255,.22) 1px,transparent 1px),
+      linear-gradient(to bottom,rgba(255,255,255,.22) 1px,transparent 1px);
+    background-size:25% 33.34%}
+  .ph small{position:absolute;left:10px;bottom:10px;text-align:left;color:#fff;
+    font:400 9px/1.25 var(--sans);letter-spacing:.02em}
+
+  /* ===== 彈窗 ===== */
+  .overlay{position:fixed;inset:0;z-index:90;overflow-y:auto;overscroll-behavior:contain;
+    background:var(--dim);opacity:0;visibility:hidden;
+    transition:opacity .45s ease,visibility 0s linear .45s}
+  .overlay.open{opacity:1;visibility:visible;transition:opacity .45s ease}
+  .sheet{margin:clamp(100px,19vh,170px) 0 70px;background:var(--sheet);
+    border-radius:20px;padding:20px var(--gutter) var(--gutter);
+    transform:translateY(110vh);transition:transform .65s cubic-bezier(.2,.85,.2,1)}
+  .overlay.open .sheet{transform:none}
+  .close{display:block;margin:0 auto;font:400 12.5px/1 var(--sans);padding:6px 10px}
+  .close:hover{opacity:.5}
+  .s-head{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter);padding:clamp(34px,6vh,64px) 0 clamp(30px,5vh,52px)}
+  .s-title{font:600 15px/1.25 var(--serif)}
+  .s-date{font:400 15px/1.25 var(--serif);color:var(--mute)}
+  .s-text p{margin-bottom:1.1em;max-width:62ch}
+  .s-imgs{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter)}
+  .s-imgs figure{position:relative;border-radius:12px;overflow:hidden;background:var(--ph);aspect-ratio:3/2}
+  .s-imgs figure.full{grid-column:1/-1;aspect-ratio:16/9}
+  .s-imgs img{width:100%;height:100%;object-fit:cover;display:block}
+  .s-foot{padding-top:clamp(30px,5vh,52px)}
+
+  /* ===== 關於 / 聯絡 ===== */
+  #information{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gutter);
+    align-content:start;padding:clamp(48px,7vh,72px) var(--gutter) clamp(48px,8vh,80px);font-size:15px}
+  #information p{margin-bottom:1.15em}
+  #information .lab{padding-left:1.8em}      /* A1 / B2 / C3 */
+  #information em{font-style:italic}
+  #information .c2,#information .c3{max-width:34ch}
+  #information .c2{justify-self:start}
+
+  footer{position:relative;display:flex;justify-content:space-between;align-items:center;
+    padding:0 var(--gutter) 22px;font:400 11.5px/1 var(--sans)}
+  footer a:hover{opacity:.5}
+  .foot-mid{position:absolute;left:50%;transform:translateX(-50%)}
+
+  /* ===== 手機 ===== */
+  @media (max-width:900px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+    #information{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:560px){
+    .grid{grid-template-columns:1fr}
+    .s-head{grid-template-columns:1fr}
+    .s-imgs{grid-template-columns:1fr}
+    #information{grid-template-columns:1fr;padding-top:48px}
+    #information .c2,#information .c3{max-width:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition-duration:.01s!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- 導覽 -->
+<div class="nav">
+  <div>
+    <a href="#home">首頁</a><span class="sep">,</span>
+    <a href="#projects">作品</a><span class="sep">,</span>
+    <a href="#information">關於</a>
+  </div>
+  <div>
+    <a href="mailto:hello@example.com">Email</a><span class="sep">,</span>
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</div>
+
+<!-- 首頁 -->
+<section id="home">
+  <div class="hero-name">你的名字 Your Name</div>
+  <h1 class="hero-title">portfolio</h1>
+  <div class="hero-caption">
+    平面設計 · 品牌識別 · 出版品<br>
+    Graphic Design, Identity, Editorial<br>
+    2026
+  </div>
+</section>
+
+<!-- 作品 -->
+<section id="projects">
+  <div class="grid" id="grid"></div>
+</section>
+
+<!-- 關於 -->
+<section id="information">
+  <div class="c1">
+    <p>你的名字</p>
+    <p>平面設計師<br><em>品牌識別與出版品</em><br>台北，台灣</p>
+    <p>(886) 900-000-000<br><a href="mailto:hello@example.com">hello@example.com</a><br><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></p>
+  </div>
+  <div class="c2">
+    <p class="lab">A1</p>
+    <p><em>在這裡寫一句話介紹自己。</em>我專注於品牌識別、書籍與刊物設計，以及視覺系統。這段文字可以換成你的設計理念或工作方式。</p>
+    <p class="lab">B2</p>
+    <p>這裡寫更完整的自我介紹：你的背景、擅長的領域、合作過的客戶與你重視的事。</p>
+  </div>
+  <div class="c3">
+    <p class="lab">C3</p>
+    <p>這裡可以寫接案方式、合作流程，或是歡迎來信洽詢的說明。<em>也可以放上你的服務項目。</em>內容長短都可以，版面會自動延展。</p>
+  </div>
+  <div class="c4">
+    <p><em>經歷</em></p>
+    <p>某設計工作室，設計師<br>2024 — 至今</p>
+    <p><em>獲獎</em><br>某設計獎，入選<br>2025</p>
+    <p>某大學 視覺傳達設計系<br>2020 — 2024</p>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 你的名字</span>
+  <a class="foot-mid" href="#home">Top ↑</a>
+  <span id="clock">--:--:--</span>
+</footer>
+
+<!-- 彈窗 -->
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="s-title">
+    <button class="close" data-close>(Close)</button>
+    <div class="s-head">
+      <div><div class="s-title" id="s-title"></div><div class="s-date" id="s-date"></div></div>
+      <div class="s-text" id="s-text"></div>
+    </div>
+    <div class="s-imgs" id="s-imgs"></div>
+    <div class="s-foot"><button class="close" data-close>(Close)</button></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   在這裡編輯你的作品
+   title : 縮圖下方的小標題
+   cover : 縮圖圖片路徑（例如 "images/01-cover.jpg"）；留空會顯示佔位圖
+   date  : 彈窗左側的日期 / 年份
+   text  : 彈窗右側的說明，一個字串就是一段
+   images: 彈窗內的圖片，{ src:"路徑", full:true } 的 full 會佔滿整排
+   ============================================================ */
+const projects = [
+  { title:"專案名稱一", date:"2026 年 5 月", cover:"",
+    text:["在這裡寫專案說明：客戶背景、要解決的問題與設計概念。","第二段可以寫製作過程、使用的材質或字體，以及最後的成果。"],
+    images:[{src:""},{src:""},{src:"",full:true},{src:""},{src:""}] },
+  { title:"專案名稱二", date:"2026 年 3 月", cover:"",
+    text:["專案說明。"], images:[{src:""},{src:""},{src:"",full:true}] },
+  { title:"專案名稱三", date:"2025 年 11 月", cover:"",
+    text:["專案說明。"], images:[{src:""},{src:""},{src:""},{src:""}] },
+  { title:"專案名稱四", date:"2025 年 8 月", cover:"",
+    text:["專案說明。"], images:[{src:"",full:true},{src:""},{src:""}] },
+  { title:"專案名稱五", date:"2025 年 4 月", cover:"",
+    text:["專案說明。"], images:[{src:""},{src:""},{src:""},{src:""}] },
+  { title:"專案名稱六", date:"2025 年 1 月", cover:"",
+    text:["專案說明。"], images:[{src:""},{src:""}] },
+  { title:"專案名稱七", date:"2024 年 10 月", cover:"",
+    text:["專案說明。"], images:[{src:""},{src:""},{src:"",full:true}] },
+  { title:"專案名稱八", date:"2024 年 6 月", cover:"",
+    text:["專案說明。"], images:[{src:""},{src:""}] },
+  { title:"專案名稱九", date:"2024 年 2 月", cover:"",
+    text:["專案說明。"], images:[{src:""},{src:""},{src:""},{src:""}] }
+];
+
+/* ---------- 以下不用改 ---------- */
+const $ = s => document.querySelector(s);
+const pad2 = n => String(n).padStart(2,'0');
+
+function media(src, label){
+  if (src){ const i = new Image(); i.src = src; i.alt = label || ''; i.loading = 'lazy'; return i; }
+  const d = document.createElement('div'); d.className = 'ph';
+  d.innerHTML = `<small>${label || ''}<br>Placeholder Image</small>`;
+  return d;
+}
+
+/* 作品格線 */
+const grid = $('#grid');
+projects.forEach((p, i) => {
+  const b = document.createElement('button');
+  b.className = 'item';
+  const t = document.createElement('span'); t.className = 'thumb';
+  t.appendChild(media(p.cover, pad2(i+1)));
+  const c = document.createElement('span'); c.className = 'cap'; c.textContent = p.title;
+  b.append(t, c);
+  b.addEventListener('click', () => openSheet(i));
+  grid.appendChild(b);
+});
+
+/* 捲動進場 */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+}), {threshold:.08});
+document.querySelectorAll('.item').forEach(el => io.observe(el));
+
+/* 彈窗 */
+const overlay = $('#overlay');
+function openSheet(i){
+  const p = projects[i];
+  $('#s-title').textContent = p.title;
+  $('#s-date').textContent = p.date;
+  const tx = $('#s-text'); tx.replaceChildren();
+  p.text.forEach(s => { const el = document.createElement('p'); el.textContent = s; tx.appendChild(el); });
+  const im = $('#s-imgs'); im.replaceChildren();
+  p.images.forEach((g, k) => {
+    const f = document.createElement('figure');
+    if (g.full) f.className = 'full';
+    f.appendChild(media(g.src, `${pad2(i+1)}-${k+1}`));
+    im.appendChild(f);
+  });
+  overlay.scrollTop = 0;
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden','false');
+  document.body.classList.add('locked');
+}
+function closeSheet(){
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden','true');
+  document.body.classList.remove('locked');
+}
+document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', closeSheet));
+overlay.addEventListener('click', e => { if (e.target === overlay) closeSheet(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
+
+/* 頁尾時鐘 */
+function tick(){ const d = new Date(); $('#clock').textContent = [d.getHours(),d.getMinutes(),d.getSeconds()].map(pad2).join(':'); }
+tick(); setInterval(tick, 1000);
+</script>
+</body>
+</html>
