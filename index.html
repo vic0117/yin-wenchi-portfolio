@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>你的名字 — 平面設計作品集</title>
+<title>殷文琪 Wenchi Yin — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Noto+Sans+TC:wght@400;500;900&family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
@@ -87,11 +87,14 @@
   .s-head{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter);padding:clamp(34px,6vh,64px) 0 clamp(30px,5vh,52px)}
   .s-title{font:600 15px/1.25 var(--serif)}
   .s-date{font:400 15px/1.25 var(--serif);color:var(--mute)}
-  .s-text p{margin-bottom:1.1em;max-width:62ch}
+  .s-text p{margin-bottom:1.1em;max-width:62ch;white-space:pre-line}
   .s-imgs{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter)}
   .s-imgs figure{position:relative;border-radius:12px;overflow:hidden;background:var(--ph);aspect-ratio:3/2}
   .s-imgs figure.full{grid-column:1/-1;aspect-ratio:16/9}
   .s-imgs img{width:100%;height:100%;object-fit:cover;display:block}
+  /* 有真實圖片時依原圖比例顯示，不裁切（作品集的跨頁圖） */
+  .s-imgs figure.has-img{aspect-ratio:auto;background:transparent;border-radius:8px}
+  .s-imgs figure.has-img img{height:auto;object-fit:contain}
   .s-foot{padding-top:clamp(30px,5vh,52px)}
 
   /* ===== 關於 / 聯絡 ===== */
@@ -135,19 +138,19 @@
     <a href="#information">關於</a>
   </div>
   <div>
-    <a href="mailto:hello@example.com">Email</a><span class="sep">,</span>
-    <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+    <a href="mailto:shueisha08@gmail.com">Email</a><span class="sep">,</span>
+    <a href="https://instagram.com/fy17___" target="_blank" rel="noopener">Instagram</a>
   </div>
 </div>
 
 <!-- 首頁 -->
 <section id="home">
-  <div class="hero-name">你的名字 Your Name</div>
+  <div class="hero-name">殷文琪 Wenchi Yin</div>
   <h1 class="hero-title">portfolio</h1>
   <div class="hero-caption">
-    平面設計 · 品牌識別 · 出版品<br>
-    Graphic Design, Identity, Editorial<br>
-    2026
+    廣告代理 · 視覺設計 · 廣編圖片 · 企業識別<br>
+    Graphic Design, Advertising, Identity<br>
+    2025
   </div>
 </section>
 
@@ -159,30 +162,30 @@
 <!-- 關於 -->
 <section id="information">
   <div class="c1">
-    <p>你的名字</p>
-    <p>平面設計師<br><em>品牌識別與出版品</em><br>台北，台灣</p>
-    <p>(886) 900-000-000<br><a href="mailto:hello@example.com">hello@example.com</a><br><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></p>
+    <p>殷文琪<br>Wenchi Yin</p>
+    <p>平面設計師<br><em>廣告代理 · 視覺設計 · 企業識別</em></p>
+    <p><a href="mailto:shueisha08@gmail.com">shueisha08@gmail.com</a><br><a href="https://instagram.com/fy17___" target="_blank" rel="noopener">Instagram</a></p>
   </div>
   <div class="c2">
-    <p class="lab">A1</p>
-    <p><em>在這裡寫一句話介紹自己。</em>我專注於品牌識別、書籍與刊物設計，以及視覺系統。這段文字可以換成你的設計理念或工作方式。</p>
-    <p class="lab">B2</p>
-    <p>這裡寫更完整的自我介紹：你的背景、擅長的領域、合作過的客戶與你重視的事。</p>
+    <p><em>學歷</em><br>中國文化大學 廣告學系<br>泰北高中 美工科</p>
+    <p><em>技術工具</em><br>PS 95%<br>AI 98%<br>ID 95%<br>PR 50%</p>
   </div>
   <div class="c3">
-    <p class="lab">C3</p>
-    <p>這裡可以寫接案方式、合作流程，或是歡迎來信洽詢的說明。<em>也可以放上你的服務項目。</em>內容長短都可以，版面會自動延展。</p>
+    <p><em>工作經歷</em><br>太登國際整合行銷有限公司 設計部實習生</p>
+    <p>中國文化大學 廣告學系 31 屆畢籌組 視覺組</p>
+    <p>美紗創意有限公司 設計師</p>
+    <p>奧汀整合行銷傳播股份有限公司 創意策略部 / 平面設計師</p>
+    <p>李奧貝納股份有限公司 資深設計師</p>
+    <p>光洋波斯特國際展覽股份有限公司 視覺設計師</p>
+    <p>財團法人台北市文化基金會-松山文創園區 設計資深專員</p>
   </div>
   <div class="c4">
-    <p><em>經歷</em></p>
-    <p>某設計工作室，設計師<br>2024 — 至今</p>
-    <p><em>獲獎</em><br>某設計獎，入選<br>2025</p>
-    <p>某大學 視覺傳達設計系<br>2020 — 2024</p>
+    <p><em>獎項</em><br>2014 年 北市學生美術比賽第一名<br>2014 年 全國學生美術比賽 甲等<br>2015 年 北市學生美術比賽第三名<br>2016 年 台北市優良生<br>2016 年 市長獎<br>2016 年 中國文化大學美術學系全校美展平面藝術第二名<br>2018 年 中國文化大學廣告學系 師生聯展展出<br>2019 年 中國文化大學廣告學系 師生聯展展出</p>
   </div>
 </section>
 
 <footer>
-  <span>© 2026 你的名字</span>
+  <span>© 2026 殷文琪 Wenchi Yin</span>
   <a class="foot-mid" href="#home">Top ↑</a>
   <span id="clock">--:--:--</span>
 </footer>
@@ -209,26 +212,69 @@
    text  : 彈窗右側的說明，一個字串就是一段
    images: 彈窗內的圖片，{ src:"路徑", full:true } 的 full 會佔滿整排
    ============================================================ */
+/* pg(5,6,7)：依原作品集 PDF 的頁碼，載入 images/p05.jpg、p06.jpg、p07.jpg（跨頁大圖） */
+const pg = (...n) => n.map(x => ({ src:`images/p${String(x).padStart(2,'0')}.jpg`, full:true }));
+
 const projects = [
-  { title:"專案名稱一", date:"2026 年 5 月", cover:"",
-    text:["在這裡寫專案說明：客戶背景、要解決的問題與設計概念。","第二段可以寫製作過程、使用的材質或字體，以及最後的成果。"],
-    images:[{src:""},{src:""},{src:"",full:true},{src:""},{src:""}] },
-  { title:"專案名稱二", date:"2026 年 3 月", cover:"",
-    text:["專案說明。"], images:[{src:""},{src:""},{src:"",full:true}] },
-  { title:"專案名稱三", date:"2025 年 11 月", cover:"",
-    text:["專案說明。"], images:[{src:""},{src:""},{src:""},{src:""}] },
-  { title:"專案名稱四", date:"2025 年 8 月", cover:"",
-    text:["專案說明。"], images:[{src:"",full:true},{src:""},{src:""}] },
-  { title:"專案名稱五", date:"2025 年 4 月", cover:"",
-    text:["專案說明。"], images:[{src:""},{src:""},{src:""},{src:""}] },
-  { title:"專案名稱六", date:"2025 年 1 月", cover:"",
-    text:["專案說明。"], images:[{src:""},{src:""}] },
-  { title:"專案名稱七", date:"2024 年 10 月", cover:"",
-    text:["專案說明。"], images:[{src:""},{src:""},{src:"",full:true}] },
-  { title:"專案名稱八", date:"2024 年 6 月", cover:"",
-    text:["專案說明。"], images:[{src:""},{src:""}] },
-  { title:"專案名稱九", date:"2024 年 2 月", cover:"",
-    text:["專案說明。"], images:[{src:""},{src:""},{src:""},{src:""}] }
+  { title:"廣告代理", date:"媒體廣告代理", cover:"images/cover-1.jpg",
+    text:[
+      "媒體廣告代理 / 設計商標包裝等 / 廣告及促銷整體規劃",
+      "McDonald's　設計商標包裝 / 廣告及促銷整體規劃\nLay's\nToshiba\n百仕可\nVisa　廣告及促銷整體規劃"
+    ],
+    images: pg(5,6,7,8,9,10,11) },
+
+  { title:"展覽視覺", date:"視覺設計 / 展覽視覺", cover:"images/cover-2.jpg",
+    text:[
+      "視覺設計 / 展覽視覺",
+      "淨零城市展（交通部）\n台北國際書展（故宮）\n國際人工智慧暨物聯網展\n台灣精品獎頒獎典禮公關活動\n2024 TAIWAN EXPO INDIA\n2024 AI EXPO"
+    ],
+    images: pg(13,14,15) },
+
+  { title:"商業類視覺設計", date:"視覺設計 / 商業類 · 2022 – 2025", cover:"images/cover-3.jpg",
+    text:[
+      "視覺設計 / 商業類",
+      "2023 新光人壽台中表揚大會（舞臺、展板）\n2023 鴻海科技集團嘉年華（舞臺、展板、司儀臺、現場執行）\n2022 GOOGLE 父親節慶祝活動（直播畫面、GOOGLE 搜尋頁面）\n2025 雙北世界壯年運動會 授旗儀式（現場執行）\n2022 世界華人工商婦女企管協會 世界年會（現場執行）\n2022 台積電八廠年終餐會\n2022 南山人壽榮譽晚會\n2022 雙鶴靈芝 35 週年\n2022 國泰人壽 年度大賞\n2022 威盛集團年終餐會\n2022 永豐銀行 心楷模\n2022 中華民國警察之友會暨 40 週年慶祝餐敘\n2022 立誠光電 年終餐會\n2022 OB 嚴選 18 歲品牌生日慶\n2022 艾睿電子春酒\n2022 馬光醫療網 尾牙晚宴\n2022 松山區鯉魚躍龍門成年禮\n2022 Vivian 生日運動會\n2022 Mine Mission 草地派對"
+    ],
+    images: pg(16,17,18,19,20,21,22,23,24,25,26) },
+
+  { title:"校園類視覺設計", date:"視覺設計 / 校園類 · 2021 – 2022", cover:"images/cover-4.jpg",
+    text:[
+      "視覺設計 / 校園類",
+      "2022 臺灣師範大學校慶午宴\n2022 新北高工畢業典禮\n2022 治平高中校慶演唱會\n2021 臺北教育大學聯合聖誕晚會\n2022 輔英科技大學校園演唱會\n2021 臺南大學校園演唱會"
+    ],
+    images: pg(27,28,29) },
+
+  { title:"街星 JUKSY 廣編圖片", date:"廣編圖片設計", cover:"images/cover-5.jpg",
+    text:[
+      "街星 JUKSY 廣編圖片視覺設計（www.juksy.com）",
+      "OUTLET\n宏佳騰智慧電車 Ai-1More\nAi-1 Ultra Belt\n遠雄海洋公園\nLEE Reimagined Denim\nLEE Reimagined Denim\nNew Balance Ｘ 溫妮 WINNI\nNew Balance\nPorsche Ｘ P. LEAGUE+\nReebok X Street Fighter\nZIV 墨鏡\nGAP\nGAP 4 種搭配\nMORE\nGAP 綠色生活\nColumbia X Kevin\nHOKA 攜手餐廳品牌\nGAP X KOL\nLee「X-LINE 系列」\n精選異國料理\nBIS IN DEI\nReeBok 復古運動風\nGU 極致工裝褲系列"
+    ],
+    images: pg(31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53) },
+
+  { title:"飾品賣場企業識別", date:"企業識別 / 形象", cover:"images/cover-6.jpg",
+    text:[
+      "飾品賣場 企業識別 / 形象",
+      "Instagram：instagram.com/niji.studioo"
+    ],
+    images: pg(55) },
+
+  { title:"平面藝術：繪畫與版畫", date:"平面藝術 · 2014 – 2018", cover:"images/cover-7.jpg",
+    text:[
+      "繪畫\n囚禁　2018 中國文化大學廣告學系 師生聯展\n望　2016 中國文化大學美術學系全校美展 平面藝術 第二名",
+      "版畫\n森之幻夢　2015 北市學生美術比賽 第三名\n文明之殤　2014 北市學生美術比賽 第一名、2014 全國學生美術比賽 甲等"
+    ],
+    images: pg(57,58) },
+
+  { title:"電腦繪圖", date:"平面藝術 / 電腦繪圖", cover:"images/cover-8.jpg",
+    text:["電腦繪圖"],
+    images: pg(59) },
+
+  { title:"手作飾品 / 攝影", date:"手工藝 / 攝影", cover:"images/cover-9.jpg",
+    text:[
+      "手作飾品 / 攝影",
+      "Instagram：instagram.com/niji.studioo"
+    ],
+    images: pg(61,62,63) }
 ];
 
 /* ---------- 以下不用改 ---------- */
@@ -248,7 +294,7 @@ projects.forEach((p, i) => {
   const b = document.createElement('button');
   b.className = 'item';
   const t = document.createElement('span'); t.className = 'thumb';
-  t.appendChild(media(p.cover, pad2(i+1)));
+  t.appendChild(media(p.cover, p.title));
   const c = document.createElement('span'); c.className = 'cap'; c.textContent = p.title;
   b.append(t, c);
   b.addEventListener('click', () => openSheet(i));
@@ -273,7 +319,8 @@ function openSheet(i){
   p.images.forEach((g, k) => {
     const f = document.createElement('figure');
     if (g.full) f.className = 'full';
-    f.appendChild(media(g.src, `${pad2(i+1)}-${k+1}`));
+    if (g.src) f.classList.add('has-img');
+    f.appendChild(media(g.src, `${p.title} ${k+1}`));
     im.appendChild(f);
   });
   overlay.scrollTop = 0;

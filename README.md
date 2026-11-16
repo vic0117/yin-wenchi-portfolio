@@ -1,23 +1,33 @@
-# 殷文琪Portfolio
+# 殷文琪 Wenchi Yin — Portfolio
 
 平面設計作品集網站。單一 `index.html`，不需後端，用 GitHub Pages 發布。
 
 ## 結構
 - `index.html`：整個網站（首頁、作品格線、點擊彈窗、關於區）
-- `images/`：作品圖片，在 `index.html` 的 `projects` 陣列用相對路徑引用，例如 `images/01-cover.jpg`
+- `images/`
+  - `cover-1.jpg` ~ `cover-9.jpg`：首頁格線的縮圖封面（3:2）
+  - `pXX.jpg`：作品集 PDF 各跨頁的大圖，XX 是 PDF 頁碼（例如 `p05.jpg` 是第 5 頁）
+
+## 作品分類（對應 PDF）
+1. 廣告代理（PDF 5–11 頁）
+2. 展覽視覺（13–15）
+3. 商業類視覺設計（16–26）
+4. 校園類視覺設計（27–29）
+5. 街星 JUKSY 廣編圖片（31–53）
+6. 飾品賣場企業識別（55）
+7. 平面藝術：繪畫與版畫（57–58）
+8. 電腦繪圖（59）
+9. 手作飾品 / 攝影（61–63）
 
 ## 編輯內容
-打開 `index.html`，找到 `projects` 陣列，每個專案填：
+打開 `index.html`，找到 `projects` 陣列，每個專案有：
 - `title`：縮圖下方的小標題
-- `cover`：縮圖圖片路徑（留空會顯示佔位圖）
-- `date`：彈窗左側日期
-- `text`：彈窗右側說明，一個字串一段
-- `images`：彈窗內圖片，`{ src:"路徑", full:true }` 的 full 會佔滿整排
+- `cover`：縮圖圖片路徑
+- `date`：彈窗左側的分類 / 年份
+- `text`：彈窗右側的簡介，一個字串一段，字串裡的 `\n` 會換行
+- `images`：彈窗內的圖片，`pg(5,6,7)` 代表載入 `images/p05.jpg`、`p06.jpg`、`p07.jpg`
 
 首頁文字、關於區與聯絡資訊直接在 HTML 內修改。
 
 ## 圖片建議
-JPG 或 WebP，每張盡量控制在幾百 KB 以內。GitHub Pages 網站總大小上限 1 GB。
-
-## 目前狀態
-所有作品、名稱、聯絡資訊仍是範例內容，待換成正式資料。
+JPG 或 WebP。GitHub Pages 網站總大小上限 1 GB。
