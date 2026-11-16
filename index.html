@@ -88,9 +88,10 @@
   .s-title{font:600 15px/1.25 var(--serif)}
   .s-date{font:400 15px/1.25 var(--serif);color:var(--mute)}
   .s-text p{margin-bottom:1.1em;max-width:62ch;white-space:pre-line}
-  .s-imgs{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter)}
+  /* 一排兩張，每張寬度 = 外面格線縮圖的寬度（3 欄格線的 1 欄），靠左排列 */
+  .s-imgs{display:grid;grid-template-columns:repeat(2,calc((100% - 2*var(--gutter))/3));justify-content:start;gap:var(--gutter)}
   .s-imgs figure{position:relative;border-radius:12px;overflow:hidden;background:var(--ph);aspect-ratio:3/2}
-  .s-imgs figure.full{grid-column:1/-1;aspect-ratio:16/9}
+  .s-imgs figure.full{aspect-ratio:3/2}
   .s-imgs img{width:100%;height:100%;object-fit:cover;display:block}
   /* 有真實圖片時依原圖比例顯示，不裁切（作品集的跨頁圖） */
   .s-imgs figure.has-img{aspect-ratio:auto;background:transparent;border-radius:8px}
@@ -102,7 +103,7 @@
     align-content:start;padding:clamp(48px,7vh,72px) var(--gutter) clamp(48px,8vh,80px);font-size:15px}
   #information p{margin-bottom:1.15em}
   #information .lab{padding-left:1.8em}      /* A1 / B2 / C3 */
-  #information em{font-style:italic}
+  #information em{font-style:normal;font-weight:600}
   #information .c2,#information .c3{max-width:34ch}
   #information .c2{justify-self:start}
 
@@ -114,6 +115,7 @@
   /* ===== 手機 ===== */
   @media (max-width:900px){
     .grid{grid-template-columns:repeat(2,1fr)}
+    .s-imgs{grid-template-columns:repeat(2,calc((100% - var(--gutter))/2))}
     #information{grid-template-columns:1fr 1fr}
   }
   @media (max-width:560px){
@@ -137,10 +139,6 @@
     <a href="#projects">作品</a><span class="sep">,</span>
     <a href="#information">關於</a>
   </div>
-  <div>
-    <a href="mailto:shueisha08@gmail.com">Email</a><span class="sep">,</span>
-    <a href="https://instagram.com/fy17___" target="_blank" rel="noopener">Instagram</a>
-  </div>
 </div>
 
 <!-- 首頁 -->
@@ -150,7 +148,7 @@
   <div class="hero-caption">
     廣告代理 · 視覺設計 · 廣編圖片 · 企業識別<br>
     Graphic Design, Advertising, Identity<br>
-    2025
+    2026
   </div>
 </section>
 
@@ -163,7 +161,7 @@
 <section id="information">
   <div class="c1">
     <p>殷文琪<br>Wenchi Yin</p>
-    <p>平面設計師<br><em>廣告代理 · 視覺設計 · 企業識別</em></p>
+    <p>平面設計師<br>廣告代理 · 視覺設計 · 企業識別</p>
     <p><a href="mailto:shueisha08@gmail.com">shueisha08@gmail.com</a><br><a href="https://instagram.com/fy17___" target="_blank" rel="noopener">Instagram</a></p>
   </div>
   <div class="c2">
