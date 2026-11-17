@@ -99,6 +99,7 @@
   /* 有真實圖片時依原圖比例顯示，不裁切（作品集的跨頁圖） */
   .s-imgs figure.has-img{aspect-ratio:auto;background:transparent;border-radius:8px}
   .s-imgs figure.has-img img{height:auto;object-fit:contain}
+  .s-imgs figure.has-img.small img{width:auto;max-width:100%}
   .s-foot{padding-top:clamp(30px,5vh,52px)}
 
   /* ===== 關於 / 聯絡 ===== */
@@ -213,106 +214,146 @@
    text  : 彈窗右側的整個分類簡介，一個字串就是一段；留空 [] 就不顯示
    images: 彈窗內的圖片，用 pic(頁碼, "說明") 寫，說明會放在該張圖的下方
    ============================================================ */
-/* pic(頁碼, 說明)：載入 images/pXX.jpg，「說明」會放在這張圖的下方（\n 換行） */
-const pic = (page, cap = '') => ({ src:`images/p${String(page).padStart(2,'0')}.jpg`, cap });
+/* pic(圖片檔名, 說明)：載入 images/檔名.jpg，「說明」會放在這張圖的下方（\n 換行）。檔名 p20-0 = PDF 第 20 頁的第 0 張圖 */
+const pic = (name, cap = '') => ({ src:`images/${name}.jpg`, cap });
 
 const projects = [
   { title:"廣告代理", date:"媒體廣告代理", cover:"images/cover-1.jpg",
     text:["媒體廣告代理 / 設計商標包裝等 / 廣告及促銷整體規劃"],
     images:[
-      pic(5,"McDonald's"),
-      pic(6,"McDonald's　設計商標包裝 / 廣告及促銷整體規劃"),
-      pic(7,"Lay's"),
-      pic(8,"Toshiba"),
-      pic(9,"百仕可"),
-      pic(10,"Visa"),
-      pic(11,"Visa　廣告及促銷整體規劃")
+      pic("p05-0", "McDonald's"),
+      pic("p06-0", "McDonald's　設計商標包裝 / 廣告及促銷整體規劃"),
+      pic("p06-1"),
+      pic("p07-0", "Lay's"),
+      pic("p08-0", "Toshiba"),
+      pic("p09-0", "百仕可"),
+      pic("p10-0", "Visa"),
+      pic("p11-0", "Visa　廣告及促銷整體規劃")
     ] },
 
   { title:"展覽視覺", date:"視覺設計 / 展覽視覺", cover:"images/cover-2.jpg",
     text:[],
     images:[
-      pic(13,"淨零城市展（交通部）\n台北國際書展（故宮）"),
-      pic(14,"國際人工智慧暨物聯網展\n台灣精品獎頒獎典禮公關活動"),
-      pic(15,"2024 TAIWAN EXPO INDIA\n2024 AI EXPO")
+      pic("p13-9", "淨零城市展（交通部）"),
+      pic("p13-21", "台北國際書展（故宮）"),
+      pic("p14-75", "國際人工智慧暨物聯網展"),
+      pic("p14-71", "台灣精品獎頒獎典禮公關活動"),
+      pic("p15-0", "2024 TAIWAN EXPO INDIA"),
+      pic("p15-3", "2024 AI EXPO")
     ] },
 
   { title:"商業類視覺設計", date:"視覺設計 / 商業類 · 2022 – 2025", cover:"images/cover-3.jpg",
     text:[],
     images:[
-      pic(16,"2023 新光人壽台中表揚大會（舞臺、展板）"),
-      pic(17,"2023 鴻海科技集團嘉年華（舞臺、展板、司儀臺、現場執行）"),
-      pic(18,"2022 GOOGLE 父親節慶祝活動（直播畫面、GOOGLE 搜尋頁面）"),
-      pic(19,"2025 雙北世界壯年運動會 授旗儀式（現場執行）\n2022 世界華人工商婦女企管協會 世界年會（現場執行）"),
-      pic(20,"2022 台積電八廠年終餐會\n2022 南山人壽榮譽晚會"),
-      pic(21,"2022 雙鶴靈芝 35 週年\n2022 國泰人壽 年度大賞"),
-      pic(22,"2022 威盛集團年終餐會\n2022 永豐銀行 心楷模"),
-      pic(23,"2022 中華民國警察之友會暨 40 週年慶祝餐敘\n2022 立誠光電 年終餐會"),
-      pic(24,"2022 OB 嚴選 18 歲品牌生日慶\n2022 艾睿電子春酒"),
-      pic(25,"2022 馬光醫療網 尾牙晚宴\n2022 松山區鯉魚躍龍門成年禮"),
-      pic(26,"2022 Vivian 生日運動會\n2022 Mine Mission 草地派對")
+      pic("p16-2311", "2023 新光人壽台中表揚大會（舞臺、展板）"),
+      pic("p16-2312"),
+      pic("p17-1720", "2023 鴻海科技集團嘉年華（舞臺、展板、司儀臺、現場執行）"),
+      pic("p18-3", "2022 GOOGLE 父親節慶祝活動"),
+      pic("p18-0", "直播畫面"),
+      pic("p18-1"),
+      pic("p18-2"),
+      pic("p18-4", "GOOGLE 搜尋頁面"),
+      pic("p19-1", "2025 雙北世界壯年運動會 授旗儀式（現場執行）"),
+      pic("p19-0"),
+      pic("p19-44", "2022 世界華人工商婦女企管協會 世界年會（現場執行）"),
+      pic("p20-0", "2022 台積電八廠年終餐會"),
+      pic("p20-1", "2022 南山人壽榮譽晚會"),
+      pic("p21-0", "2022 雙鶴靈芝 35 週年"),
+      pic("p21-1", "2022 國泰人壽 年度大賞"),
+      pic("p22-0", "2022 威盛集團年終餐會"),
+      pic("p22-1", "2022 永豐銀行 心楷模"),
+      pic("p23-265", "2022 立誠光電 年終餐會"),
+      pic("p24-0", "2022 OB 嚴選 18 歲品牌生日慶"),
+      pic("p24-1", "2022 艾睿電子春酒"),
+      pic("p25-1", "2022 馬光醫療網 尾牙晚宴"),
+      pic("p25-0", "2022 松山區鯉魚躍龍門成年禮"),
+      pic("p26-0", "2022 Vivian 生日運動會"),
+      pic("p26-1", "2022 Mine Mission 草地派對")
     ] },
 
   { title:"校園類視覺設計", date:"視覺設計 / 校園類 · 2021 – 2022", cover:"images/cover-4.jpg",
     text:[],
     images:[
-      pic(27,"2022 臺灣師範大學校慶午宴\n2022 新北高工畢業典禮"),
-      pic(28,"2022 治平高中校慶演唱會\n2021 臺北教育大學聯合聖誕晚會"),
-      pic(29,"2022 輔英科技大學校園演唱會\n2021 臺南大學校園演唱會")
+      pic("p27-1", "2022 臺灣師範大學校慶午宴"),
+      pic("p27-0", "2022 新北高工畢業典禮"),
+      pic("p28-0", "2022 治平高中校慶演唱會"),
+      pic("p28-1", "2021 臺北教育大學聯合聖誕晚會"),
+      pic("p29-0", "2022 輔英科技大學校園演唱會"),
+      pic("p29-1", "2021 臺南大學校園演唱會")
     ] },
 
   { title:"街星 JUKSY 廣編圖片", date:"廣編圖片設計", cover:"images/cover-5.jpg",
     text:["街星 JUKSY 廣編圖片視覺設計（www.juksy.com）"],
     images:[
-      pic(31,"OUTLET"),
-      pic(32,"宏佳騰智慧電車 Ai-1More"),
-      pic(33,"Ai-1 Ultra Belt"),
-      pic(34,"遠雄海洋公園"),
-      pic(35,"LEE Reimagined Denim"),
-      pic(36,"LEE Reimagined Denim"),
-      pic(37,"New Balance Ｘ 溫妮 WINNI"),
-      pic(38,"New Balance"),
-      pic(39,"Porsche Ｘ P. LEAGUE+"),
-      pic(40,"Reebok X Street Fighter"),
-      pic(41,"ZIV 墨鏡"),
-      pic(42,"GAP"),
-      pic(43,"GAP 4 種搭配"),
-      pic(44,"MORE"),
-      pic(45,"GAP 綠色生活"),
-      pic(46,"Columbia X Kevin"),
-      pic(47,"HOKA 攜手餐廳品牌"),
-      pic(48,"GAP X KOL"),
-      pic(49,"Lee「X-LINE 系列」"),
-      pic(50,"精選異國料理"),
-      pic(51,"BIS IN DEI"),
-      pic(52,"ReeBok 復古運動風"),
-      pic(53,"GU 極致工裝褲系列")
+      pic("p31-0", "OUTLET"),
+      pic("p32-0", "宏佳騰智慧電車 Ai-1More"),
+      pic("p33-0", "Ai-1 Ultra Belt"),
+      pic("p34-0", "遠雄海洋公園"),
+      pic("p35-0", "LEE Reimagined Denim"),
+      pic("p36-0", "LEE Reimagined Denim"),
+      pic("p37-0", "New Balance Ｘ 溫妮 WINNI"),
+      pic("p38-0", "New Balance"),
+      pic("p39-0", "Porsche Ｘ P. LEAGUE+"),
+      pic("p40-0", "Reebok X Street Fighter"),
+      pic("p41-0", "ZIV 墨鏡"),
+      pic("p42-0", "GAP"),
+      pic("p43-0", "GAP 4 種搭配"),
+      pic("p44-0", "MORE"),
+      pic("p45-0", "GAP 綠色生活"),
+      pic("p46-0", "Columbia X Kevin"),
+      pic("p47-0", "HOKA 攜手餐廳品牌"),
+      pic("p48-0", "GAP X KOL"),
+      pic("p49-0", "Lee「X-LINE 系列」"),
+      pic("p50-0", "精選異國料理"),
+      pic("p51-0", "BIS IN DEI"),
+      pic("p52-0", "ReeBok 復古運動風"),
+      pic("p53-0", "GU 極致工裝褲系列")
     ] },
 
   { title:"飾品賣場企業識別", date:"企業識別 / 形象", cover:"images/cover-6.jpg",
     text:[],
     images:[
-      pic(55,"飾品賣場 企業識別 / 形象\nInstagram：instagram.com/niji.studioo")
+      pic("p55-6", "飾品賣場 企業識別 / 形象\nInstagram：instagram.com/niji.studioo")
     ] },
 
   { title:"平面藝術：繪畫與版畫", date:"平面藝術 · 2014 – 2018", cover:"images/cover-7.jpg",
     text:[],
     images:[
-      pic(57,"繪畫\n囚禁　2018 中國文化大學廣告學系 師生聯展\n望　2016 中國文化大學美術學系全校美展 平面藝術 第二名"),
-      pic(58,"版畫\n森之幻夢　2015 北市學生美術比賽 第三名\n文明之殤　2014 北市學生美術比賽 第一名、2014 全國學生美術比賽 甲等")
+      pic("p57-0", "囚禁（繪畫）\n2018 中國文化大學廣告學系 師生聯展"),
+      pic("p57-1", "望（繪畫）\n2016 中國文化大學美術學系全校美展 平面藝術 第二名"),
+      pic("p58-0", "森之幻夢（版畫）\n2015 北市學生美術比賽 第三名"),
+      pic("p58-1", "文明之殤（版畫）\n2014 北市學生美術比賽 第一名\n2014 全國學生美術比賽 甲等")
     ] },
 
   { title:"電腦繪圖", date:"平面藝術 / 電腦繪圖", cover:"images/cover-8.jpg",
     text:[],
-    images:[ pic(59,"電腦繪圖") ] },
+    images:[
+      pic("p59-4", "電腦繪圖"),
+      pic("p59-1"),
+      pic("p59-0"),
+      pic("p59-2"),
+      pic("p59-3")
+    ] },
 
   { title:"手作飾品 / 攝影", date:"手工藝 / 攝影", cover:"images/cover-9.jpg",
     text:[],
     images:[
-      pic(61,"手作飾品 / 攝影\nInstagram：instagram.com/niji.studioo"),
-      pic(62,"手作飾品 / 攝影"),
-      pic(63,"手作飾品 / 攝影")
+      pic("p61-0", "手作飾品 / 攝影\nInstagram：instagram.com/niji.studioo"),
+      pic("p61-1"),
+      pic("p61-2"),
+      pic("p61-3"),
+      pic("p61-5"),
+      pic("p61-4"),
+      pic("p61-6"),
+      pic("p62-2"),
+      pic("p62-0"),
+      pic("p62-1"),
+      pic("p63-0"),
+      pic("p63-1"),
+      pic("p63-2"),
+      pic("p63-3")
     ] }
+
 ];
 
 /* ---------- 以下不用改 ---------- */
@@ -359,7 +400,9 @@ function openSheet(i){
     const item = document.createElement('div'); item.className = 'si';
     const f = document.createElement('figure');
     if (g.src) f.classList.add('has-img');
-    f.appendChild(media(g.src, `${p.title} ${k+1}`));
+    const m = media(g.src, `${p.title} ${k+1}`);
+    if (g.src && m.tagName==='IMG') m.addEventListener('load', () => { if (m.naturalWidth < 700) f.classList.add('small'); });
+    f.appendChild(m);
     item.appendChild(f);
     if (g.cap){ const c = document.createElement('div'); c.className = 'si-cap'; c.textContent = g.cap; item.appendChild(c); }
     wrap.appendChild(item);
