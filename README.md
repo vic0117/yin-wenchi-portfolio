@@ -1,4 +1,4 @@
-# 殷文琪 Wenchi Yin — Portfolio
+# 殷文琪 Yin — Portfolio
 
 平面設計作品集網站。單一 `index.html`，不需後端，用 GitHub Pages 發布。
 
